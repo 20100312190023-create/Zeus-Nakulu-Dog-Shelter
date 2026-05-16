@@ -1,0 +1,278 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Zeus Nakulu Dog Shelter</title>
+
+<style>
+
+body{
+  font-family: Arial, sans-serif;
+  margin:0;
+  background:#f8e8c2;
+}
+
+/* TABS */
+.tabs{
+  display:flex;
+  background:#333;
+}
+
+.tabs button{
+  flex:1;
+  padding:15px;
+  border:none;
+  background:#8448e6;
+  color:white;
+  font-size:18px;
+  cursor:pointer;
+}
+
+.tabs button:hover{
+   background:#8d4fdf;
+}
+
+
+
+.tabs button.active{
+   background: #8061f1;
+}
+
+/* CONTENT */
+.tab-content{
+  display:none;
+  padding:40px;
+  background:white;
+  min-height:90vh;
+}
+
+#home{
+  display:block;
+}
+
+h1,h2{
+  color:#070707;
+}
+
+/* CARDS */
+.container{
+  display:flex;
+  flex-wrap:wrap;
+  gap:20px;
+}
+
+.card{
+  width:220px;
+  background:#fafafa;
+  padding:15px;
+  border-radius:10px;
+  text-align:center;
+  box-shadow:0 2px 8px rgba(0,0,0,0.2);
+}
+
+.card img{
+  width:100%;
+  border-radius:10px;
+}
+
+/* BUTTON */
+button.action{
+  background:#963ffa;
+  color:white;
+  border:none;
+  padding:10px;
+  border-radius:5px;
+  cursor:pointer;
+  margin-top:10px;
+}
+
+button.action:hover{
+  background:#8b4df0;
+}
+
+/* FORMS */
+input, textarea{
+  width:90%;
+  max-width:400px;
+  padding:10px;
+  margin:10px 0;
+}
+
+/* MESSAGES */
+#msg, #donateMsg, #contactMsg{
+  margin-top:20px;
+  font-size:18px;
+  color:green;
+}
+
+</style>
+</head>
+
+<body>
+
+<!-- TABS -->
+<div class="tabs">
+
+  <button class="tablink active" onclick="openTab('home', this)">Home</button>
+  <button class="tablink" onclick="openTab('adoption', this)">Adoption</button>
+  <button class="tablink" onclick="openTab('donation', this)">Donation</button>
+  <button class="tablink" onclick="openTab('contact', this)">Contact</button>
+
+</div>
+
+<!-- HOME -->
+<div id="home" class="tab-content">
+
+  <h1>Zeus Nakulu Dog Shelter 🐶</h1>
+
+  <p> Dogs are loyal, friendly, and intelligent animals often called “human's Best Friend.” They have lived with humans for thousands of years and help in many ways, such as companionship, protection, and service work.</p>
+
+  <p>Different dog breeds have different sizes, personalities, and skills. Some dogs are playful and energetic, while others are calm and protective. Puppies are young dogs that are very active and need training, while adult dogs are usually more stable and easier to manage.</p>
+
+  <p>Dogs communicate using barking, body language, and facial expressions. They also show emotions like happiness, sadness, excitement, and fear. With proper care, food, training, and love, dogs can live long and healthy lives and become very strong companions.</p>
+
+  <p>At a dog shelter, many dogs are waiting for a safe and loving home where they can be cared for and become part of a family. </p>
+  <p>We rescue abandoned dogs and find them loving homes ❤️</p>
+  
+</div>
+
+<!-- ADOPTION -->
+<div id="adoption" class="tab-content">
+
+  <h2>Adopt a Dog</h2>
+
+  <div class="container">
+
+    <div class="card">
+      <img src="https://images.unsplash.com/photo-1517849845537-4d257902454a?q=80&w=800&auto=format&fit=crop">
+      <img src="images/Black_pug_with_longer_legs.jpg">
+      <h3>Buddy</h3>
+      <p> Pug | 2 years</p>
+      <button class="action" onclick="adopt('Buddy')">Adopt Me</button>
+    </div>
+
+    <div class="card">
+      <img src="https://images.unsplash.com/photo-1518717758536-85ae29035b6d?q=80&w=800&auto=format&fit=crop">
+      <h3>Lucy</h3>
+      <p>German shorthaired pointer | 1 year</p>
+      <button class="action" onclick="adopt('Lucy')">Adopt Me</button>
+    </div>
+
+    <div class="card">
+      <img src="https://images.unsplash.com/photo-1537151625747-768eb6cf92b2?q=80&w=800&auto=format&fit=crop">
+      <h3>Max</h3>
+      <p>Corgi |  12 months</p>
+      <button class="action" onclick="adopt('Max')">Adopt Me</button>
+    </div>
+
+  </div>
+
+  <p id="msg"></p>
+
+</div>
+
+<!-- DONATION -->
+<div id="donation" class="tab-content">
+
+  <h2>Support Our Shelter ❤️</h2>
+
+  <input type="text" id="name" placeholder="Your Name">
+  <br>
+  <input type="number" id="amount" placeholder="Donation Amount(Nu)">
+
+  <button class="action" onclick="donate()">
+    Donate Now
+  </button>
+
+  <p id="donateMsg"></p>
+
+</div>
+
+<!-- CONTACT -->
+<div id="contact" class="tab-content">
+
+  <h2>Contact Us 📩</h2>
+
+  <p>Thimphu, Bhutan</p>
+  <p>Email: zeusnakuludogshelter.org</p>
+  <p>Phone: +975 77 76 46 92</p>
+
+  <input type="text" id="cname" placeholder="Your Name">
+  <input type="email" id="cemail" placeholder="Your Email">
+
+  <textarea id="cmsg" rows="5" placeholder="Your Message"></textarea>
+
+  <button class="action" onclick="sendMessage()">
+    Send Message
+  </button>
+
+  <p id="contactMsg"></p>
+
+</div>
+
+<!-- JAVASCRIPT -->
+<script>
+
+function openTab(tabId, element){
+
+  let tabs = document.getElementsByClassName("tab-content");
+
+  for(let i=0;i<tabs.length;i++){
+    tabs[i].style.display = "none";
+  }
+
+  let buttons = document.getElementsByClassName("tablink");
+
+  for(let i=0;i<buttons.length;i++){
+    buttons[i].classList.remove("active");
+  }
+
+  document.getElementById(tabId).style.display = "block";
+
+  element.classList.add("active");
+}
+
+/* ADOPT */
+function adopt(name){
+  document.getElementById("msg").innerHTML =
+  "🐶 You successfully adopted " + name + "!";
+}
+
+/* DONATE */
+function donate(){
+
+  let name = document.getElementById("name").value;
+  let amount = document.getElementById("amount").value;
+
+  if(name === "" || amount === ""){
+    document.getElementById("donateMsg").innerHTML =
+    "⚠ Please fill all fields!";
+    return;
+  }
+
+  document.getElementById("donateMsg").innerHTML =
+  "❤️ Thank you " + name + " for donating $" + amount + "!";
+}
+
+/* CONTACT */
+function sendMessage(){
+
+  let name = document.getElementById("cname").value;
+  let email = document.getElementById("cemail").value;
+  let msg = document.getElementById("cmsg").value;
+
+  if(name === "" || email === "" || msg === ""){
+    document.getElementById("contactMsg").innerHTML =
+    "⚠ Please fill all fields!";
+    return;
+  }
+
+  document.getElementById("contactMsg").innerHTML =
+  "📩 Thank you " + name + ", we will contact you soon!";
+}
+
+</script>
+
+</body>
+</html>
